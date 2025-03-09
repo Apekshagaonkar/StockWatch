@@ -143,3 +143,43 @@ Note : Limited to 25 calls per day.
     git remote add origin https://github.com/apekshagaonkar/StockWatch.git
     git push -u origin main
     ```
+
+
+Learning from this project : 
+
+- What compromises did you make due to time constraints?
+  - Limited Historical Data – The API only retrieves data for the most recent 100 days by using outputsize: compact, instead of a full historical dataset.
+  - Cache Concurrency Handling Not Implemented – The caching mechanism is basic and does not handle simultaneous requests modifying cache.
+  - No Rate Limiting – The API does not enforce request rate limits, making it vulnerable to excessive requests.
+  - No Authentication – The API does not restrict access, meaning anyone can access stock data without authorization.
+
+  
+- What would you do differently if this software was meant for production use?
+  - Persistent and Concurrent Cache Handling – Store cached data in a database (Redis/PostgreSQL) instead of in-memory storage and implement concurrency control.
+  - Rate Limiting – Use tools like FastAPI’s dependencies middleware or Redis-based rate limiting to prevent API abuse.
+  - Authentication & Authorization – Restrict API access using API keys, OAuth, or JWT authentication to allow only authorized users.
+
+
+- Propose how you might implement authentication, such that only authorized users may hit these endpoints.
+  - Each user gets a unique API key.
+  - Requests must include a valid key in the header.
+  - Requests without a valid API key will be rejected with a 401 Unauthorized error.
+  - API keys can be stored in a database and revoked when necessary.
+
+
+- How much time did you spend on this exercise?
+    -  Approximately 5 hours, covering:
+      Understanding the problem, API, and tools (~1 hour)
+      Researching FastAPI best practices (~30 minutes)
+      Implementing the solution (~2 hours)
+      Writing unit tests with pytest (~30 minutes)
+      Debugging and refining (~30 minutes)
+      Documenting the implementation (~30 minutes)
+
+- Please include any other comments about your implementation.
+  -  The project effectively demonstrates FastAPI, caching, and API interactions.
+  - Unit tests provide reasonable coverage but could be expanded for edge cases.
+  - The caching mechanism works but needs improvements for concurrent handling.
+
+- Please include any general feedback you have about the exercise.
+  - Covers real-world API design challenges (caching, rate limiting, data integrity). I really enjoyed this exercise and learned a lot.
