@@ -4,4 +4,3 @@ from .app import app
 from .stock_service import StockAPI
 
 __all__ = ["app", "StockAPI"]
-
